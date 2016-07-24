@@ -1,38 +1,39 @@
 package o.horbenko.helpers.localizationstring;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import o.horbenko.helpers.localizationstring.hibernate.LocalizationAttributeConverter;
-import o.horbenko.helpers.localizationstring.jackson.LocalizedStringSerializer;
+import o.horbenko.helpers.localizationstring.hibernate.LocalizedStringAttributeConverter;
+import o.horbenko.helpers.localizationstring.jackson.LocalizedStringJsonSerializer;
 
 import javax.persistence.Convert;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.EnumMap;
 
-
-@JsonSerialize(using = LocalizedStringSerializer.class)
-@Convert(converter = LocalizationAttributeConverter.class)
+/**
+ * Class, that contains Map LocaleEnum-String value
+ * Need for hibernate entities that need to save in cache
+ * */
+@Convert(converter = LocalizedStringAttributeConverter.class)   //for hibernate
+@JsonSerialize(using = LocalizedStringJsonSerializer.class)     //for jackson
 public class LocalizedString {
 
-    private Map<String, String> localizedValues;
+    private EnumMap<LocaleEnum, String> localizedValues;
 
 
     public LocalizedString() {
-        localizedValues = new HashMap<>();
+        localizedValues = new EnumMap<>(LocaleEnum.class);
     }
 
-    public String getLocalized(String locale) {
-        return localizedValues.containsKey(locale) ? localizedValues.get(locale) : "";
-    }
 
-    public LocalizedString(Map<String, String> localizedValues) {
+    public LocalizedString(EnumMap<LocaleEnum, String> localizedValues) {
         this.localizedValues = localizedValues;
     }
 
-    public Map<String, String> getLocalizedValues() {
+    public String getLocalized(LocaleEnum key) {
+        return localizedValues.containsKey(key) ? localizedValues.get(key) : "";
+    }
+
+    public EnumMap<LocaleEnum, String> getLocalizedValues() {
         return localizedValues;
     }
 
-    public void setLocalizedValues(Map<String, String> localizedValues) {
-        this.localizedValues = localizedValues;
-    }
+
 }

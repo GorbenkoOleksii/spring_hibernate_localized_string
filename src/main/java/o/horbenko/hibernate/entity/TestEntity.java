@@ -15,7 +15,7 @@ public class TestEntity {
     private Long id;
 
     @Column(name = "value")
-    private LocalizedString localizedParam;
+    private LocalizedString localizedParam; //in entities we just replace String or Map<String, Object> TO LocalizedString
 
     public Long getId() {
         return id;

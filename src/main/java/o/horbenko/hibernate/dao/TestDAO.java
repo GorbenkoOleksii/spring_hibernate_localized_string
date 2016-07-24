@@ -1,6 +1,6 @@
 package o.horbenko.hibernate.dao;
 
-import o.horbenko.exception.PersistanceException;
+import o.horbenko.exception.PersistenceException;
 import o.horbenko.hibernate.entity.TestEntity;
 import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
@@ -23,16 +23,14 @@ public class TestDAO {
     }
 
 
-    public List<TestEntity> getAll() throws PersistanceException {
+    public List<TestEntity> getAll() throws PersistenceException {
         try {
-
 
             return sessionFactory.getCurrentSession().createCriteria(TestEntity.class).list();
 
-
         } catch (HibernateException e) {
             e.printStackTrace();
-            throw new PersistanceException("Exception in db layer", e);
+            throw new PersistenceException("Exception in db layer", e);
         }
     }
 

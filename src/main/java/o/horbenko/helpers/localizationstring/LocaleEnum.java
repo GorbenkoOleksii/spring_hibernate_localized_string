@@ -1,59 +1,66 @@
 package o.horbenko.helpers.localizationstring;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Locale;
 
+/**
+ * Custom LocaleEnum for complexity of getting (in serialization/deserialization) value from Map = O(1)
+ *
+ * @author horbenko oleksii
+ * */
 public enum LocaleEnum {
 
-    UK_UA {
+    uk_UA {
         final Locale locale = new Locale("uk", "UA");
 
+        @JsonValue
         @NotNull
         @Override
         public String toString() {
-            return "uk_UA";
+            return locale.toString();
         }
     },
 
-    EN_US {
+    en_US {
         final Locale locale = new Locale("en", "US");
 
+        @JsonValue
         @NotNull
         @Override
         public String toString() {
-            return "en_US";
+            return locale.toString();
         }
     },
 
-    RU_RU {
+    ru_RU {
         final Locale locale = new Locale("ru", "RU");
 
+        @JsonValue
         @NotNull
         @Override
         public String toString() {
-            return "en_US";
+            return locale.toString();
         }
     };
 
-    public static LocaleEnum getLocale(String localeString) {
-        LocaleEnum localeEnum;
 
-        switch (localeString) {
-            case "uk_UA" :
-                localeEnum = UK_UA;
-                break;
-            case "en_US" :
-                localeEnum = EN_US;
-                break;
-            case "ru_RU" :
-                localeEnum = RU_RU;
-                break;
+    @JsonCreator
+    public static LocaleEnum fromValue(String localeString) {
+        try {
 
-            default:
-                localeEnum = EN_US;
+            return LocaleEnum.valueOf(localeString);    //get Enum by string
+
+        } catch (IllegalArgumentException e) {
+
+            return LocaleEnum.en_US;                    //or return default
+
         }
-
-        return localeEnum;
     }
+
+
+
+
 }
