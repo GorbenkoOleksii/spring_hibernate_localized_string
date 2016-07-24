@@ -61,13 +61,16 @@ AND
 @JsonSerialize(using = LocalizedStringJsonSerializer.class)     //for jackson
 ```
 
-There are Custom realizations of converters for Hibernate and Jackson
-first - for creating LocalizedString object from String in DB 
-WHY WE NEED IT?
-for caching. In Cache we need to save all Locale-String value pairs
-Than we using it application until we returned them via Jackson
+There are Custom realizations of converters for Hibernate and Jackson.
+First - for creating LocalizedString object from String in DB 
 
-for jackson, we create custom JsonSerializer
+-WHY WE NEED IT?
+-for caching. 
+
+In Cache we need to save all Locale-String value pairs
+Than we using it application until we returned them via Jackson.
+
+For jackson, we create custom JsonSerializer
 ```java
 @Component
 public class LocalizedStringJsonSerializer extends JsonSerializer<LocalizedString> {
@@ -84,7 +87,7 @@ public class LocalizedStringJsonSerializer extends JsonSerializer<LocalizedStrin
 ```
 
 WHAT ``` LocaleContextHolder.getLocale(); ``` is it?
-LocaleContextHolder holds ThreadLocal value of Locale
+LocaleContextHolder holds ThreadLocal value of Locale of current thread
 
 for setting Locale in runtime we just configure beans:
 
