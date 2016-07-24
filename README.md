@@ -23,7 +23,7 @@ and you want just to replace this with this and let spring and hibernate to loca
   
   
 # MAIN IDEA:
-Create own type, something like `LocalizedString` that contains EnumMap with LocaleEnum-String represantation key-value pair
+Create own type, something like `LocalizedString` that contains EnumMap with LocaleEnum-String key-value pairs
 ```java
 @Convert(converter = LocalizedStringAttributeConverter.class)   //for hibernate
 @JsonSerialize(using = LocalizedStringJsonSerializer.class)     //for jackson
