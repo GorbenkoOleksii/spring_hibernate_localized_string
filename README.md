@@ -1,4 +1,4 @@
-# Spring+Hivernate Localization string from DB via user locale settings
+# Spring+Hivernate and Jackson Localization string from DB via user locale settings
 1. Imagine that you use Hibernate, Spring and Jackson in own WebApp
 2. Imagine that u have database (postgres, for example) in that you have save String/JSON fields in format like
 
